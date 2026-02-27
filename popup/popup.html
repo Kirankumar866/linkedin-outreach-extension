@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=400">
+  <title>LinkedIn Outreach Assistant</title>
+  <link rel="stylesheet" href="popup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="url(#grad)"/>
+            <defs><linearGradient id="grad" x1="2" y1="4" x2="22" y2="20"><stop stop-color="#6c63ff"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs>
+          </svg>
+          <h1>Outreach<span class="accent">AI</span></h1>
+        </div>
+      </div>
+      <div class="header-right">
+        <button id="settingsBtn" class="icon-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Status Bar -->
+    <div id="statusBar" class="status-bar hidden">
+      <div class="status-icon"></div>
+      <span id="statusText"></span>
+    </div>
+
+    <!-- Profile Card -->
+    <section class="card profile-card">
+      <div class="card-header">
+        <h2>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile Data
+        </h2>
+        <button id="scrapeBtn" class="btn-small">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          Scrape
+        </button>
+      </div>
+      <div class="profile-fields">
+        <div class="field-row">
+          <label>Name</label>
+          <input type="text" id="profileName" placeholder="John Doe">
+        </div>
+        <div class="field-row">
+          <label>Headline</label>
+          <input type="text" id="profileHeadline" placeholder="Software Engineer at Google">
+        </div>
+        <div class="field-row">
+          <label>Company</label>
+          <input type="text" id="profileCompany" placeholder="Google">
+        </div>
+        <div class="field-row">
+          <label>About</label>
+          <textarea id="profileAbout" placeholder="Brief summary..." rows="2"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outreach Mode -->
+    <section class="card mode-card">
+      <div class="card-header">
+        <h2>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Outreach Mode
+        </h2>
+      </div>
+      <div class="mode-toggle">
+        <button id="modeJob" class="mode-btn active" data-mode="job">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Job Application
+        </button>
+        <button id="modeNetwork" class="mode-btn" data-mode="networking">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Networking
+        </button>
+      </div>
+    </section>
+
+    <!-- Job Details (visible in Job mode) -->
+    <section id="jobSection" class="card job-card">
+      <div class="card-header">
+        <h2>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Target Position
+        </h2>
+      </div>
+      <div class="profile-fields">
+        <div class="field-row">
+          <label>Job Title</label>
+          <input type="text" id="jobTitle" placeholder="Senior Software Engineer">
+        </div>
+        <div class="field-row">
+          <label>Company</label>
+          <input type="text" id="jobCompany" placeholder="Google">
+        </div>
+      </div>
+    </section>
+
+    <!-- Email & Tone -->
+    <section class="card email-card">
+      <div class="card-header">
+        <h2>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email Details
+        </h2>
+      </div>
+      <div class="profile-fields">
+        <div class="field-row email-row">
+          <label>Recipient Email</label>
+          <div class="input-group">
+            <input type="email" id="recipientEmail" placeholder="john.doe@company.com">
+            <button id="findEmailBtn" class="btn-small btn-accent" title="Find email via Hunter.io">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Find
+            </button>
+          </div>
+        </div>
+        <div class="field-row">
+          <label>Subject</label>
+          <input type="text" id="emailSubject" placeholder="Quick question about the team at Google">
+        </div>
+        <div class="field-row">
+          <label>Tone</label>
+          <select id="toneSelect">
+            <option value="professional">Professional</option>
+            <option value="semi-casual">Semi-Casual</option>
+            <option value="casual">Casual</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Generated Message -->
+    <section class="card message-card">
+      <div class="card-header">
+        <h2>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Message
+        </h2>
+        <button id="copyBtn" class="btn-small hidden" title="Copy to clipboard">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy
+        </button>
+      </div>
+      <textarea id="messageBody" placeholder="Click 'Generate' to create a personalized message..." rows="8"></textarea>
+    </section>
+
+    <!-- Action Buttons -->
+    <div class="actions">
+      <button id="generateBtn" class="btn btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Generate Message
+      </button>
+      <button id="sendBtn" class="btn btn-success" disabled>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Send Email
+      </button>
+    </div>
+  </div>
+
+  <script src="../utils/ai.js"></script>
+  <script src="../utils/hunter.js"></script>
+  <script src="../utils/gmail.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=600">
+    <title>OutreachAI — Settings</title>
+    <link rel="stylesheet" href="options.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="settings-app">
+        <header class="settings-header">
+            <div class="logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
+                        fill="url(#grad2)" />
+                    <defs>
+                        <linearGradient id="grad2" x1="2" y1="4" x2="22" y2="20">
+                            <stop stop-color="#6c63ff" />
+                            <stop offset="1" stop-color="#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Outreach<span class="accent">AI</span> Settings</h1>
+            </div>
+            <p class="subtitle">Configure your API keys and personal profile for personalized outreach</p>
+        </header>
+
+        <!-- Status -->
+        <div id="settingsStatus" class="settings-status hidden"></div>
+
+        <!-- API Keys Section -->
+        <section class="settings-section">
+            <div class="section-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
+                </svg>
+                <h2>API Keys</h2>
+            </div>
+            <div class="section-body">
+                <div class="field">
+                    <label for="geminiKey">Gemini API Key</label>
+                    <p class="field-help">Get your key from <a href="https://aistudio.google.com/"
+                            target="_blank">Google AI Studio</a></p>
+                    <div class="input-with-action">
+                        <input type="password" id="geminiKey" placeholder="AIza...">
+                        <button class="toggle-vis" data-target="geminiKey" title="Show/hide">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="hunterKey">Hunter.io API Key</label>
+                    <p class="field-help">Get your key from <a href="https://hunter.io/" target="_blank">Hunter.io</a>
+                        (25 free searches/month)</p>
+                    <div class="input-with-action">
+                        <input type="password" id="hunterKey" placeholder="Your Hunter.io API key">
+                        <button class="toggle-vis" data-target="hunterKey" title="Show/hide">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gmail Connection -->
+        <section class="settings-section">
+            <div class="section-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                </svg>
+                <h2>Gmail Connection</h2>
+            </div>
+            <div class="section-body">
+                <div class="gmail-status">
+                    <div id="gmailIndicator" class="indicator disconnected"></div>
+                    <span id="gmailStatusText">Not connected</span>
+                </div>
+                <div class="gmail-actions">
+                    <button id="connectGmailBtn" class="btn btn-primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                            <polyline points="10 17 15 12 10 7" />
+                            <line x1="15" y1="12" x2="3" y2="12" />
+                        </svg>
+                        Connect Gmail
+                    </button>
+                    <button id="disconnectGmailBtn" class="btn btn-outline hidden">
+                        Disconnect
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Your Profile -->
+        <section class="settings-section">
+            <div class="section-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                <h2>Your Profile</h2>
+            </div>
+            <p class="section-desc">This information is used to personalize outreach messages. Fill in as much as you'd
+                like.</p>
+            <div class="section-body">
+                <div class="field-grid">
+                    <div class="field">
+                        <label for="userName">Full Name</label>
+                        <input type="text" id="userName" placeholder="Jane Smith">
+                    </div>
+                    <div class="field">
+                        <label for="userRole">Current Role</label>
+                        <input type="text" id="userRole" placeholder="Software Engineer">
+                    </div>
+                    <div class="field">
+                        <label for="userCompany">Company</label>
+                        <input type="text" id="userCompany" placeholder="Acme Corp">
+                    </div>
+                    <div class="field">
+                        <label for="userEducation">Education</label>
+                        <input type="text" id="userEducation" placeholder="BS Computer Science, MIT">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="userSkills">Key Skills</label>
+                    <input type="text" id="userSkills" placeholder="Python, Machine Learning, React, AWS">
+                </div>
+                <div class="field">
+                    <label for="userSummary">Background Summary</label>
+                    <p class="field-help">A brief paragraph about yourself that will be used in generated messages</p>
+                    <textarea id="userSummary" rows="4"
+                        placeholder="I'm a passionate software engineer with 3 years of experience in full-stack development. I specialize in building scalable web applications and have a keen interest in AI/ML..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Default Preferences -->
+        <section class="settings-section">
+            <div class="section-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
+                <h2>Default Preferences</h2>
+            </div>
+            <div class="section-body">
+                <div class="field-grid">
+                    <div class="field">
+                        <label for="defaultTone">Default Tone</label>
+                        <select id="defaultTone">
+                            <option value="professional">Professional</option>
+                            <option value="semi-casual">Semi-Casual</option>
+                            <option value="casual">Casual</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="defaultMode">Default Outreach Mode</label>
+                        <select id="defaultMode">
+                            <option value="job">Job Application</option>
+                            <option value="networking">Networking</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Save -->
+        <div class="save-bar">
+            <button id="saveBtn" class="btn btn-primary btn-large">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                    <polyline points="17 21 17 13 7 13 7 21" />
+                    <polyline points="7 3 7 8 15 8" />
+                </svg>
+                Save Settings
+            </button>
+            <button id="resetBtn" class="btn btn-outline">Reset to Defaults</button>
+        </div>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+
+</html>
